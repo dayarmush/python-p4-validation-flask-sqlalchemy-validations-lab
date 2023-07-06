@@ -8,10 +8,11 @@ class Author(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name= db.Column(db.String, unique=True, nullable=False)
-    phone_number = db.Column(db.String) # db.CheckConstraint()
+    phone_number = db.Column(db.String) # db.CheckConstraint() is on the database
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
+    # validates on the python object
     @validates('name')
     def validate_name(self, key, name):
         names = db.session.query(Author.name).all()
